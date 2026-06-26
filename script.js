@@ -113,7 +113,7 @@ async function berechnen() {
 
         const km       = routeData.routes[0].distance / 1000; // einfache Strecke in km
         const gesamt   = km * 2;                              // Hin + Zurück
-        const preis    = gesamt * 0.35;                       // 0,35 € pro km
+        const preis    = gesamt * 0.25;                       // 0,35 € pro km
 
         // 3. Anzeige aktualisieren
         document.getElementById("ziel").textContent    = zielKurz;
