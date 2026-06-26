@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyFotobox | by David Richter</title>
+
+    <meta name="description" content="Moderne Fotobox für Hochzeiten, Geburtstage und Firmenevents.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="navbar">
+
+<div class="logo">
+
+<h2>MyFotobox</h2>
+
+<span>by David Richter</span>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="#home">Start</a></li>
+
+<li><a href="#leistungen">Leistungen</a></li>
+
+<li><a href="#preise">Preise</a></li>
+
+<li><a href="#galerie">Galerie</a></li>
+
+<li><a href="#kontakt">Kontakt</a></li>
+
+</ul>
+
+</nav>
+
+<a class="contactButton" href="#kontakt">
+
+Jetzt anfragen
+
+</a>
+
+</div>
+
+</header>
+
+
+
+<section id="home" class="hero">
+
+<div class="overlay"></div>
+
+<div class="heroContent">
+
+<p class="subtitle">
+
+Die Fotobox für unvergessliche Momente
+
+</p>
+
+<h1>
+
+MyFotobox
+
+</h1>
+
+<h3>
+
+by David Richter
+
+</h3>
+
+<p>
+
+Ob Hochzeit, Geburtstag oder Firmenfeier –
+mit unserer Fotobox entstehen Erinnerungen,
+die für immer bleiben.
+
+</p>
+
+<div class="buttons">
+
+<a href="#preise" class="primary">
+
+Preise ansehen
+
+</a>
+
+<a href="#kontakt" class="secondary">
+
+Kontakt aufnehmen
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="leistungen">
+
+<div class="container">
+
+<h2>
+
+Warum MyFotobox?
+
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>📷</h3>
+
+<h4>Professionelle Kamera</h4>
+
+<p>
+
+Kristallklare Bilder in hoher Qualität.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🖨️</h3>
+
+<h4>108 Ausdrucke</h4>
+
+<p>
+
+108 Ausdrucke bereits im Preis enthalten.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🎭</h3>
+
+<h4>Accessoires</h4>
+
+<p>
+
+Viele lustige Requisiten inklusive.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>☁️</h3>
+
+<h4>Digitale Bilder</h4>
+
+<p>
+
+Alle Fotos zusätzlich digital.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="preise">
+
+<div class="container">
+
+<h2>
+
+Unser Paket
+
+</h2>
+
+<div class="priceBox">
+
+<h3>
+
+150 €
+
+</h3>
+
+<ul>
+
+<li>✔ Aufbau inklusive</li>
+
+<li>✔ Abbau inklusive</li>
+
+<li>✔ 108 Ausdrucke</li>
+
+<li>✔ Accessoires</li>
+
+<li>✔ Alle Bilder digital</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="fahrtkosten">
+
+    <div class="container">
+
+        <h2>Fahrtkosten berechnen</h2>
+
+        <p>
+            Gib einfach den Veranstaltungsort ein.
+        </p>
+
+        <div class="routeBox">
+
+            <input
+                type="text"
+                id="adresse"
+                placeholder="Ort oder Adresse eingeben">
+
+            <button id="berechnen">
+                Berechnen
+            </button>
+
+        </div>
+
+        <div id="ergebnis" class="resultBox">
+
+            <div class="resultItem">
+                <span>📍 Start</span>
+                <strong>Schernberg</strong>
+            </div>
+
+            <div class="resultItem">
+                <span>📍 Ziel</span>
+                <strong id="ziel">-</strong>
+            </div>
+
+            <div class="resultItem">
+                <span>🚗 Einfache Strecke</span>
+                <strong id="strecke">- km</strong>
+            </div>
+
+            <div class="resultItem">
+                <span>↔ Gesamtfahrstrecke</span>
+                <strong id="gesamt">- km</strong>
+            </div>
+
+            <div class="resultItem preis">
+                <span>💶 Fahrtkosten</span>
+                <strong id="preis">0,00 €</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section id="galerie">
+
+<div class="container">
+
+<h2>
+
+Galerie
+
+</h2>
+
+<div class="gallery">
+
+<div class="placeholder"></div>
+<div class="placeholder"></div>
+<div class="placeholder"></div>
+<div class="placeholder"></div>
+<div class="placeholder"></div>
+<div class="placeholder"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="kontakt">
+
+<div class="container">
+
+<h2>
+
+Kontakt
+
+</h2>
+
+<div class="contactBox">
+
+<h3>
+
+David Richter
+
+</h3>
+
+<p>
+
+📞 0162 4285442
+
+</p>
+
+<p>
+
+✉ David.Richter85@web.de
+
+</p>
+
+<p>
+
+📍 99706 Sondershausen OT Schernberg
+
+</p>
+
+<a class="primary" href="tel:01624285442">
+
+Jetzt anrufen
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+<p>
+
+© 2026 MyFotobox by David Richter
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

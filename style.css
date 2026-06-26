@@ -1,0 +1,825 @@
+/* ===========================
+   MyFotobox
+   by David Richter
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#05070d;
+
+    color:#ffffff;
+
+    overflow-x:hidden;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#05070d;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#1488ff;
+    border-radius:30px;
+}
+
+/* Navigation */
+
+header{
+
+    position:fixed;
+
+    width:100%;
+
+    top:0;
+
+    left:0;
+
+    z-index:999;
+
+    backdrop-filter:blur(18px);
+
+    background:rgba(10,15,30,.55);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.navbar{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 40px;
+
+}
+
+.logo h2{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.logo span{
+
+    color:#59b7ff;
+
+    font-size:14px;
+
+}
+
+nav ul{
+
+    display:flex;
+
+    gap:40px;
+
+    list-style:none;
+
+}
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+    font-weight:500;
+
+}
+
+nav a:hover{
+
+    color:#5cbcff;
+
+}
+
+.contactButton{
+
+    text-decoration:none;
+
+    padding:14px 28px;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#0b83ff,#28b4ff);
+
+    color:white;
+
+    font-weight:600;
+
+    box-shadow:0 0 30px rgba(35,150,255,.35);
+
+    transition:.4s;
+
+}
+
+.contactButton:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 45px rgba(35,150,255,.55);
+
+}
+
+/* Hero */
+
+.hero{
+
+    position:relative;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    background:url("assets/images/hero.jpg") center center/cover no-repeat;
+
+}
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(rgba(3,8,20,.75),rgba(3,8,20,.88));
+
+}
+
+.heroContent{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:900px;
+
+    padding:20px;
+
+}
+
+.subtitle{
+
+    color:#63c2ff;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    margin-bottom:25px;
+
+}
+
+.hero h1{
+
+    font-size:85px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    margin-bottom:10px;
+
+}
+
+.hero h3{
+
+    font-size:32px;
+
+    color:#67c6ff;
+
+    font-weight:300;
+
+    margin-bottom:35px;
+
+}
+
+.hero p{
+
+    font-size:22px;
+
+    color:#d6d6d6;
+
+    line-height:1.8;
+
+    margin-bottom:50px;
+
+}
+
+.buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.primary{
+
+    padding:18px 40px;
+
+    border-radius:60px;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#007BFF,#3bb6ff);
+
+    color:white;
+
+    font-size:18px;
+
+    transition:.4s;
+
+    box-shadow:0 0 40px rgba(0,130,255,.35);
+
+}
+
+.primary:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 0 60px rgba(0,130,255,.7);
+
+}
+
+.secondary{
+
+    padding:18px 40px;
+
+    border-radius:60px;
+
+    text-decoration:none;
+
+    color:white;
+
+    border:2px solid rgba(255,255,255,.2);
+
+    transition:.4s;
+
+}
+
+.secondary:hover{
+
+    background:rgba(255,255,255,.08);
+
+    transform:translateY(-5px);
+
+}
+/* ===========================
+   Allgemeine Bereiche
+=========================== */
+
+section{
+    padding:120px 40px;
+    position:relative;
+}
+
+.container{
+    max-width:1300px;
+    margin:auto;
+}
+
+section h2{
+
+    font-size:48px;
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+    font-weight:700;
+
+    color:#ffffff;
+
+}
+
+/* ===========================
+   Karten
+=========================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:35px;
+
+}
+
+.card{
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:25px;
+
+    padding:45px;
+
+    text-align:center;
+
+    transition:.4s;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    background:#0f7dff;
+
+    filter:blur(120px);
+
+    opacity:.15;
+
+    top:-120px;
+
+    left:-120px;
+
+}
+
+.card:hover{
+
+    transform:translateY(-15px);
+
+    border-color:#2ca8ff;
+
+    box-shadow:0 20px 60px rgba(0,120,255,.25);
+
+}
+
+.card h3{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.card h4{
+
+    font-size:24px;
+
+    margin-bottom:15px;
+
+}
+
+.card p{
+
+    color:#c8d3e0;
+
+    line-height:1.8;
+
+}
+
+/* ===========================
+   Preisbox
+=========================== */
+
+.priceBox{
+
+    max-width:700px;
+
+    margin:auto;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(30px);
+
+    border-radius:30px;
+
+    padding:60px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 70px rgba(0,110,255,.18);
+
+}
+
+.priceBox h3{
+
+    font-size:90px;
+
+    color:#53b7ff;
+
+    margin-bottom:40px;
+
+}
+
+.priceBox ul{
+
+    list-style:none;
+
+}
+
+.priceBox li{
+
+    font-size:22px;
+
+    padding:18px;
+
+    color:#d8e2ef;
+
+}
+
+/* ===========================
+   Fahrtkosten
+=========================== */
+
+#fahrtkosten{
+
+    text-align:center;
+
+}
+
+#fahrtkosten p{
+
+    color:#b7c4d6;
+
+    margin-bottom:25px;
+
+}
+
+#adresse{
+
+    width:100%;
+
+    max-width:700px;
+
+    padding:22px;
+
+    border-radius:60px;
+
+    border:none;
+
+    outline:none;
+
+    font-size:18px;
+
+    margin-bottom:25px;
+
+    background:#111826;
+
+    color:white;
+
+}
+
+#berechnen{
+
+    background:linear-gradient(135deg,#007BFF,#29b5ff);
+
+    color:white;
+
+    border:none;
+
+    padding:18px 50px;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+#berechnen:hover{
+
+    transform:translateY(-4px);
+
+}
+
+#ergebnis{
+
+    margin-top:40px;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    color:#66c5ff;
+
+}
+
+/* ===========================
+   Galerie
+=========================== */
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
+}
+
+.placeholder{
+
+    aspect-ratio:4/3;
+
+    border-radius:25px;
+
+    background:linear-gradient(135deg,#13213c,#08101d);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.4s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.placeholder::after{
+
+    content:"📸";
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:60px;
+
+    opacity:.25;
+
+}
+
+.placeholder:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:0 20px 60px rgba(0,120,255,.25);
+
+}
+
+/* ===========================
+   Kontakt
+=========================== */
+
+.contactBox{
+
+    max-width:700px;
+
+    margin:auto;
+
+    padding:60px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.contactBox h3{
+
+    font-size:38px;
+
+    margin-bottom:30px;
+
+}
+
+.contactBox p{
+
+    margin:15px 0;
+
+    color:#d5dbe7;
+
+    font-size:20px;
+
+}
+
+.contactBox .primary{
+
+    display:inline-block;
+
+    margin-top:40px;
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding:40px;
+
+    text-align:center;
+
+    color:#9ea8b6;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:900px){
+
+.hero h1{
+
+    font-size:58px;
+
+}
+
+.hero h3{
+
+    font-size:24px;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+}
+
+.navbar{
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+nav ul{
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+section{
+
+    padding:90px 20px;
+
+}
+
+.priceBox{
+
+    padding:35px;
+
+}
+
+.priceBox h3{
+
+    font-size:70px;
+
+}
+
+}
+.routeBox{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:40px;
+    margin-bottom:50px;
+
+}
+
+.routeBox input{
+
+    flex:1;
+    max-width:550px;
+
+}
+
+.resultBox{
+
+    max-width:700px;
+    margin:40px auto 0;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+.resultItem{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    padding-bottom:15px;
+
+}
+
+.resultItem:last-child{
+
+    border:none;
+
+}
+
+.resultItem span{
+
+    color:#b9c6d8;
+
+}
+
+.resultItem strong{
+
+    font-size:22px;
+
+    color:white;
+
+}
+
+.preis strong{
+
+    color:#42b6ff;
+    font-size:32px;
+
+}
