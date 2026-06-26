@@ -20,7 +20,12 @@
             <h2>MyFotobox</h2>
             <span>by David Richter</span>
         </div>
-        <nav>
+        <button class="hamburger" id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mainNav">
             <ul>
                 <li><a href="#home">Start</a></li>
                 <li><a href="#leistungen">Leistungen</a></li>
@@ -161,8 +166,7 @@
                 <h4>Aufbauanleitung MyFotobox</h4>
                 <p>Alle Schritte zum schnellen und sicheren Aufbau der Fotobox – inkl. Anschlüsse und Checkliste.</p>
             </div>
-            
-            <a href="Aufbauanleitung.pdf="_blank" class="primary pdfDownloadBtn">
+            <a href="https://raw.githubusercontent.com/balutz85/MyFotobox/main/Aufbauanleitung.pdf" target="_blank" class="primary pdfDownloadBtn">
                 📥 PDF herunterladen
             </a>
         </div>
@@ -173,7 +177,7 @@
 <section id="drucker">
     <div class="container">
         <h2>Drucker bedienen</h2>
-        <p class="sectionSubtitle">Schritt-für-Schritt durch den Druckvorgang – einfach durchklicken.</p>
+        <p class="sectionSubtitle">Schritt-für-Schritt durch den Druckvorgang – mit Bildern oder Videos.</p>
 
         <div class="druckerGuide">
             <!-- Fortschrittsleiste -->
@@ -186,45 +190,99 @@
             <div class="druckerSteps" id="druckerSteps">
 
                 <div class="druckerStep active" data-step="1">
-                    <div class="stepIcon">🔌</div>
+                    <div class="stepMediaArea" data-step-id="1">
+                        <div class="stepMediaPlaceholder" id="mediaPlaceholder1">
+                            <div class="mediaUploadBtn" onclick="document.getElementById('mediaInput1').click()">
+                                <span class="mediaUploadIcon">📷</span>
+                                <span>Bild oder Video hinzufügen</span>
+                                <small>JPG, PNG, MP4, MOV</small>
+                            </div>
+                            <input type="file" id="mediaInput1" accept="image/*,video/*" style="display:none" onchange="handleMedia(this, 1)">
+                        </div>
+                        <div class="stepMediaPreview" id="mediaPreview1" style="display:none"></div>
+                    </div>
                     <h3>Drucker einschalten</h3>
-                    <p>Stecke das Stromkabel des Druckers in die Steckdose und drücke den <strong>Power-Knopf</strong> an der Seite. Die LED leuchtet blau, wenn der Drucker bereit ist.</p>
-                    <div class="stepTip">💡 Tipp: Der Drucker braucht ca. 30 Sekunden zum Aufwärmen.</div>
+                    <textarea class="stepText" id="stepText1" placeholder="Beschreibung für diesen Schritt eingeben...">Stecke das Stromkabel des Druckers in die Steckdose und drücke den Power-Knopf an der Seite. Die LED leuchtet blau, wenn der Drucker bereit ist.</textarea>
                 </div>
 
                 <div class="druckerStep" data-step="2">
-                    <div class="stepIcon">📦</div>
-                    <h3>Papier & Farbbänder prüfen</h3>
-                    <p>Öffne die <strong>Fachklappe</strong> oben am Drucker. Prüfe, ob genug Druckpapier und das Farbband korrekt eingelegt sind. Die Zahl der verbleibenden Ausdrucke wird im Display angezeigt.</p>
-                    <div class="stepTip">💡 Tipp: Papier und Farbband immer zusammen wechseln – nur als Set verwenden!</div>
+                    <div class="stepMediaArea" data-step-id="2">
+                        <div class="stepMediaPlaceholder" id="mediaPlaceholder2">
+                            <div class="mediaUploadBtn" onclick="document.getElementById('mediaInput2').click()">
+                                <span class="mediaUploadIcon">📷</span>
+                                <span>Bild oder Video hinzufügen</span>
+                                <small>JPG, PNG, MP4, MOV</small>
+                            </div>
+                            <input type="file" id="mediaInput2" accept="image/*,video/*" style="display:none" onchange="handleMedia(this, 2)">
+                        </div>
+                        <div class="stepMediaPreview" id="mediaPreview2" style="display:none"></div>
+                    </div>
+                    <h3>Papier &amp; Farbbänder prüfen</h3>
+                    <textarea class="stepText" id="stepText2" placeholder="Beschreibung für diesen Schritt eingeben...">Öffne die Fachklappe oben am Drucker. Prüfe, ob genug Druckpapier und das Farbband korrekt eingelegt sind. Papier und Farbband immer zusammen wechseln!</textarea>
                 </div>
 
                 <div class="druckerStep" data-step="3">
-                    <div class="stepIcon">🔗</div>
+                    <div class="stepMediaArea" data-step-id="3">
+                        <div class="stepMediaPlaceholder" id="mediaPlaceholder3">
+                            <div class="mediaUploadBtn" onclick="document.getElementById('mediaInput3').click()">
+                                <span class="mediaUploadIcon">📷</span>
+                                <span>Bild oder Video hinzufügen</span>
+                                <small>JPG, PNG, MP4, MOV</small>
+                            </div>
+                            <input type="file" id="mediaInput3" accept="image/*,video/*" style="display:none" onchange="handleMedia(this, 3)">
+                        </div>
+                        <div class="stepMediaPreview" id="mediaPreview3" style="display:none"></div>
+                    </div>
                     <h3>Verbindung herstellen</h3>
-                    <p>Verbinde den Drucker per <strong>USB-Kabel</strong> mit dem Fotobox-Computer. Alternativ: WLAN-Verbindung im Drucker-Menü unter <em>Einstellungen → WLAN</em> prüfen.</p>
-                    <div class="stepTip">💡 Tipp: USB ist zuverlässiger – bevorzuge die Kabelverbindung bei Veranstaltungen.</div>
+                    <textarea class="stepText" id="stepText3" placeholder="Beschreibung für diesen Schritt eingeben...">Verbinde den Drucker per USB-Kabel mit dem Fotobox-Computer. USB ist zuverlässiger – bevorzuge die Kabelverbindung bei Veranstaltungen.</textarea>
                 </div>
 
                 <div class="druckerStep" data-step="4">
-                    <div class="stepIcon">🖥️</div>
+                    <div class="stepMediaArea" data-step-id="4">
+                        <div class="stepMediaPlaceholder" id="mediaPlaceholder4">
+                            <div class="mediaUploadBtn" onclick="document.getElementById('mediaInput4').click()">
+                                <span class="mediaUploadIcon">📷</span>
+                                <span>Bild oder Video hinzufügen</span>
+                                <small>JPG, PNG, MP4, MOV</small>
+                            </div>
+                            <input type="file" id="mediaInput4" accept="image/*,video/*" style="display:none" onchange="handleMedia(this, 4)">
+                        </div>
+                        <div class="stepMediaPreview" id="mediaPreview4" style="display:none"></div>
+                    </div>
                     <h3>Drucksoftware starten</h3>
-                    <p>Starte die <strong>Fotobox-Software</strong> auf dem Computer. Der Drucker sollte automatisch erkannt werden. Unter <em>Einstellungen → Drucker</em> kannst du ihn manuell auswählen, falls nötig.</p>
-                    <div class="stepTip">💡 Tipp: Mache vor dem Event einen Testdruck mit einem beliebigen Foto!</div>
+                    <textarea class="stepText" id="stepText4" placeholder="Beschreibung für diesen Schritt eingeben...">Starte die Fotobox-Software auf dem Computer. Der Drucker sollte automatisch erkannt werden. Mache vor dem Event einen Testdruck!</textarea>
                 </div>
 
                 <div class="druckerStep" data-step="5">
-                    <div class="stepIcon">🖨️</div>
+                    <div class="stepMediaArea" data-step-id="5">
+                        <div class="stepMediaPlaceholder" id="mediaPlaceholder5">
+                            <div class="mediaUploadBtn" onclick="document.getElementById('mediaInput5').click()">
+                                <span class="mediaUploadIcon">📷</span>
+                                <span>Bild oder Video hinzufügen</span>
+                                <small>JPG, PNG, MP4, MOV</small>
+                            </div>
+                            <input type="file" id="mediaInput5" accept="image/*,video/*" style="display:none" onchange="handleMedia(this, 5)">
+                        </div>
+                        <div class="stepMediaPreview" id="mediaPreview5" style="display:none"></div>
+                    </div>
                     <h3>Testdruck durchführen</h3>
-                    <p>Wähle in der Software <em>Datei → Testdruck</em> und schicke ein Foto an den Drucker. Überprüfe Farben und Schärfe des Ausdrucks. Passe ggf. die <strong>Helligkeit</strong> in den Druckereinstellungen an.</p>
-                    <div class="stepTip">💡 Tipp: Ein leicht kühlerer Weißton wirkt auf Fotos natürlicher.</div>
+                    <textarea class="stepText" id="stepText5" placeholder="Beschreibung für diesen Schritt eingeben...">Schicke ein Testfoto an den Drucker. Überprüfe Farben und Schärfe. Passe die Helligkeit in den Druckereinstellungen an falls nötig.</textarea>
                 </div>
 
                 <div class="druckerStep" data-step="6">
-                    <div class="stepIcon">✅</div>
+                    <div class="stepMediaArea" data-step-id="6">
+                        <div class="stepMediaPlaceholder" id="mediaPlaceholder6">
+                            <div class="mediaUploadBtn" onclick="document.getElementById('mediaInput6').click()">
+                                <span class="mediaUploadIcon">📷</span>
+                                <span>Bild oder Video hinzufügen</span>
+                                <small>JPG, PNG, MP4, MOV</small>
+                            </div>
+                            <input type="file" id="mediaInput6" accept="image/*,video/*" style="display:none" onchange="handleMedia(this, 6)">
+                        </div>
+                        <div class="stepMediaPreview" id="mediaPreview6" style="display:none"></div>
+                    </div>
                     <h3>Alles bereit!</h3>
-                    <p>Der Drucker ist einsatzbereit. Fotos werden automatisch nach jedem Shooting gedruckt. <strong>Viel Spaß bei der Veranstaltung!</strong></p>
-                    <div class="stepTip">💡 Tipp: Restliche Ausdrucke werden im Display angezeigt – bei unter 20 nachfüllen.</div>
+                    <textarea class="stepText" id="stepText6" placeholder="Beschreibung für diesen Schritt eingeben...">Der Drucker ist einsatzbereit. Fotos werden automatisch nach jedem Shooting gedruckt. Viel Spaß bei der Veranstaltung!</textarea>
                 </div>
 
             </div>
