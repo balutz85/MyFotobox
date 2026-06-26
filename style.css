@@ -71,16 +71,18 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
     cursor: pointer;
-    padding: 4px;
-    border-radius: 8px;
+    padding: 8px;
+    border-radius: 10px;
     flex-shrink: 0;
     transition: background .2s;
+    order: 3;
 }
 
 .hamburger:hover { background: rgba(255,255,255,.08); }
@@ -417,47 +419,51 @@ section h2 {
 #berechnen:active { transform: scale(.97); }
 
 .resultBox {
-    max-width: 650px;
-    margin: 30px auto 0;
+    max-width: 600px;
+    margin: 24px auto 0;
     background: rgba(255,255,255,.05);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255,255,255,.08);
-    border-radius: 20px;
-    padding: 25px 20px;
+    border-radius: 18px;
+    padding: 18px 16px;
     display: grid;
-    gap: 16px;
+    gap: 0;
 }
 
 .resultItem {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: 8px;
     border-bottom: 1px solid rgba(255,255,255,.07);
-    padding-bottom: 14px;
-    flex-wrap: wrap;
+    padding: 12px 6px;
+    flex-wrap: nowrap;
 }
 
-.resultItem:last-child { border: none; padding: 0; }
+.resultItem:last-child { border: none; padding-bottom: 4px; }
 
 .resultItem span {
     color: #b9c6d8;
-    font-size: 14px;
+    font-size: 13px;
     flex-shrink: 0;
+    max-width: 55%;
+    line-height: 1.4;
 }
 
 .resultItem strong {
-    font-size: 18px;
+    font-size: 15px;
     color: white;
     word-break: break-word;
     text-align: right;
     flex: 1;
+    line-height: 1.4;
 }
 
 .preis strong {
     color: #42b6ff;
-    font-size: 26px;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .maps-row {
@@ -905,7 +911,10 @@ footer {
     .priceBox { padding: 55px 50px; }
     .priceBox li { font-size: 20px; }
 
-    .resultItem strong { font-size: 20px; }
+    .resultBox     { padding: 28px 30px; gap: 0; }
+    .resultItem    { padding: 14px 6px; }
+    .resultItem span   { font-size: 15px; max-width: none; }
+    .resultItem strong { font-size: 18px; }
     .preis strong      { font-size: 28px; }
 
     .gallery { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
