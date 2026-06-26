@@ -5,25 +5,26 @@
 
 
 // ── Hamburger-Menü ────────────────────────────────────────
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('hamburger');
     const nav = document.getElementById('mainNav');
 
-    btn.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
+    if (!btn || !nav) return;
+
+    btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
         btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', open);
+        btn.setAttribute('aria-expanded', String(open));
     });
 
-    // Menü schließen wenn ein Link geklickt wird
-    nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
+    nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
             nav.classList.remove('open');
             btn.classList.remove('open');
-            btn.setAttribute('aria-expanded', false);
+            btn.setAttribute('aria-expanded', 'false');
         });
     });
-})();
+});
 
 
 // ── Fade-In Animation ──────────────────────────────────────
@@ -93,9 +94,11 @@ async function berechnen() {
             return;
         }
 
-        const zielLat = geoData[0].lat;
-        const zielLon = geoData[0].lon;
+        const zielLat  = geoData[0].lat;
+        const zielLon  = geoData[0].lon;
         const zielName = geoData[0].display_name;
+        // Kurzname: nur bis zum zweiten Komma (z.B. "Erfurt, Thüringen" statt langer Adresse)
+        const zielKurz = zielName.split(',').slice(0, 2).join(',').trim();
 
         // 2. Route berechnen (OSRM)
         const route = await fetch(
@@ -113,7 +116,7 @@ async function berechnen() {
         const preis    = gesamt * 0.35;                       // 0,35 € pro km
 
         // 3. Anzeige aktualisieren
-        document.getElementById("ziel").textContent    = zielName;
+        document.getElementById("ziel").textContent    = zielKurz;
         document.getElementById("strecke").textContent = km.toFixed(1) + " km";
         document.getElementById("gesamt").textContent  = gesamt.toFixed(1) + " km";
         document.getElementById("preis").textContent   = preis.toFixed(2).replace(".", ",") + " €";
