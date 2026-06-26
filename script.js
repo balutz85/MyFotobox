@@ -4,6 +4,28 @@
 // ================================
 
 
+// ── Hamburger-Menü ────────────────────────────────────────
+(function () {
+    const btn = document.getElementById('hamburger');
+    const nav = document.getElementById('mainNav');
+
+    btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+    });
+
+    // Menü schließen wenn ein Link geklickt wird
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', false);
+        });
+    });
+})();
+
+
 // ── Fade-In Animation ──────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -112,6 +134,43 @@ async function berechnen() {
 }
 
 
+// ── Drucker-Medien Upload ──────────────────────────────────
+function handleMedia(input, stepId) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const placeholder = document.getElementById('mediaPlaceholder' + stepId);
+    const preview     = document.getElementById('mediaPreview' + stepId);
+    const url         = URL.createObjectURL(file);
+
+    preview.innerHTML = '';
+
+    if (file.type.startsWith('video/')) {
+        const vid = document.createElement('video');
+        vid.src      = url;
+        vid.controls = true;
+        vid.style.cssText = 'width:100%;max-height:340px;border-radius:16px;object-fit:contain;';
+        preview.appendChild(vid);
+    } else {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Schritt ' + stepId;
+        img.style.cssText = 'width:100%;max-height:340px;border-radius:16px;object-fit:contain;';
+        preview.appendChild(img);
+    }
+
+    // Ändern-Button
+    const changeBtn       = document.createElement('button');
+    changeBtn.textContent = '🔄 Bild/Video ändern';
+    changeBtn.className   = 'mediaChangeBtn';
+    changeBtn.onclick     = () => input.click();
+    preview.appendChild(changeBtn);
+
+    placeholder.style.display = 'none';
+    preview.style.display     = 'block';
+}
+
+
 // ── Drucker-Anleitung (Stepper) ───────────────────────────
 (function () {
     const steps     = document.querySelectorAll(".druckerStep");
@@ -156,10 +215,3 @@ async function berechnen() {
 })();
 
 
-// ── Animations-CSS via JS (am Ende injiziert) ─────────────
-const style = document.createElement("style");
-style.textContent = `
-.hidden { opacity: 0; transform: translateY(80px); transition: opacity .9s, transform .9s; }
-.show   { opacity: 1; transform: translateY(0); }
-`;
-document.head.appendChild(style);
