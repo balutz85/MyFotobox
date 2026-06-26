@@ -823,3 +823,278 @@ section{
     font-size:32px;
 
 }
+/* ===========================
+   Neue Sections - Subtitel
+=========================== */
+
+.sectionSubtitle {
+    text-align: center;
+    color: #b7c4d6;
+    font-size: 18px;
+    margin-top: -45px;
+    margin-bottom: 50px;
+}
+
+/* ===========================
+   Fahrtkosten - Google Maps
+=========================== */
+
+.maps-row {
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.mapsBtn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #007BFF, #29b5ff);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+    box-shadow: 0 0 30px rgba(0,130,255,.3);
+}
+
+.mapsBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px rgba(0,130,255,.55);
+}
+
+/* ===========================
+   PDF Box - Aufbauanleitung
+=========================== */
+
+.pdfBox {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255,255,255,.05);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 25px;
+    padding: 40px 50px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    box-shadow: 0 20px 60px rgba(0,110,255,.12);
+    transition: .4s;
+}
+
+.pdfBox:hover {
+    border-color: #2ca8ff;
+    box-shadow: 0 25px 70px rgba(0,120,255,.22);
+}
+
+.pdfIcon {
+    font-size: 56px;
+    flex-shrink: 0;
+}
+
+.pdfInfo {
+    flex: 1;
+    min-width: 200px;
+}
+
+.pdfInfo h4 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.pdfInfo p {
+    color: #b7c4d6;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.pdfDownloadBtn {
+    padding: 15px 32px;
+    font-size: 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ===========================
+   Drucker Stepper
+=========================== */
+
+.druckerGuide {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.druckerProgress {
+    width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,.1);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.druckerProgressBar {
+    height: 100%;
+    background: linear-gradient(90deg, #007BFF, #29b5ff);
+    border-radius: 10px;
+    transition: width .4s ease;
+    width: 0%;
+}
+
+.druckerStepCount {
+    text-align: right;
+    color: #6a80a0;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.druckerSteps {
+    position: relative;
+    min-height: 300px;
+}
+
+.druckerStep {
+    display: none;
+    background: rgba(255,255,255,.05);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 25px;
+    padding: 50px;
+    text-align: center;
+    animation: stepFadeIn .35s ease;
+}
+
+.druckerStep.active {
+    display: block;
+}
+
+@keyframes stepFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.stepIcon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.druckerStep h3 {
+    font-size: 28px;
+    margin-bottom: 18px;
+    color: #fff;
+}
+
+.druckerStep p {
+    color: #c8d3e0;
+    font-size: 17px;
+    line-height: 1.85;
+    max-width: 580px;
+    margin: 0 auto 24px;
+}
+
+.stepTip {
+    background: rgba(0, 123, 255, .12);
+    border: 1px solid rgba(0, 150, 255, .2);
+    border-radius: 14px;
+    padding: 14px 22px;
+    color: #7dc8ff;
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.druckerNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.druckerBtn {
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: .3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.druckerBtn.primary {
+    background: linear-gradient(135deg, #007BFF, #29b5ff);
+    color: white;
+    box-shadow: 0 0 30px rgba(0,130,255,.3);
+}
+
+.druckerBtn.primary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px rgba(0,130,255,.55);
+}
+
+.druckerBtn.secondary {
+    background: rgba(255,255,255,.07);
+    color: white;
+    border: 1px solid rgba(255,255,255,.15);
+}
+
+.druckerBtn.secondary:hover:not(:disabled) {
+    background: rgba(255,255,255,.12);
+    transform: translateY(-3px);
+}
+
+.druckerBtn:disabled {
+    opacity: .3;
+    cursor: not-allowed;
+}
+
+.druckerDots {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.dot.active {
+    background: #29b5ff;
+    transform: scale(1.3);
+}
+
+/* ===========================
+   Responsive Ergänzungen
+=========================== */
+
+@media (max-width: 900px) {
+    .pdfBox {
+        flex-direction: column;
+        text-align: center;
+        padding: 35px 25px;
+    }
+    .pdfDownloadBtn {
+        width: 100%;
+        text-align: center;
+    }
+    .druckerStep {
+        padding: 35px 25px;
+    }
+    .druckerBtn {
+        padding: 13px 22px;
+        font-size: 15px;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}
