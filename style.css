@@ -604,8 +604,6 @@ footer {
     flex-wrap: wrap;
 }
 
-@media (min-width: 480px) {
-    .contactButtons { flex-direction: row; justify-content: center; }
 }
 
 /* ===========================
