@@ -599,11 +599,15 @@ footer {
     flex-direction: row;
     gap: 14px;
     margin-top: 28px;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-wrap: wrap;
 }
 
+.contactButtons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ===========================
