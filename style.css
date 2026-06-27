@@ -596,10 +596,12 @@ footer {
 
 .contactButtons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 14px;
     margin-top: 28px;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 @media (min-width: 480px) {
