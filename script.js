@@ -1,22 +1,20 @@
 // ================================
-// MyFotobox
-// by David Richter
+// MyFotobox – by David Richter
 // ================================
 
 
 // ── Hamburger-Menü ────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('hamburger');
-    const nav = document.getElementById('mainNav');
-
-    if (!btn || !nav) return;
+    var btn = document.getElementById('hamburger');
+    var nav = document.getElementById('mainNav');
 
     btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('open');
-        btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', String(open));
+        var isOpen = nav.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    // Menü schließen wenn Link angeklickt wird
     nav.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
             nav.classList.remove('open');
@@ -27,194 +25,112 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// ── Fade-In Animation ──────────────────────────────────────
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+// ── Fade-In beim Scrollen ─────────────────────────────────
+var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-            entry.target.classList.add("show");
+            entry.target.classList.add('show');
         }
     });
-}, { threshold: .12 });
+}, { threshold: 0.1 });
 
-document.querySelectorAll("section").forEach(section => {
-    section.classList.add("hidden");
+document.querySelectorAll('section').forEach(function (section) {
+    section.classList.add('hidden');
     observer.observe(section);
 });
 
 
-// ── Karten Hover-Tilt ──────────────────────────────────────
-document.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.transform =
-            `rotateY(${(x - rect.width / 2) / 25}deg)
-             rotateX(${-(y - rect.height / 2) / 25}deg)
-             translateY(-12px)`;
+// ── Karten Hover-Tilt (nur Desktop) ──────────────────────
+if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            card.style.transform =
+                'rotateY(' + ((x - rect.width / 2) / 25) + 'deg) ' +
+                'rotateX(' + (-(y - rect.height / 2) / 25) + 'deg) ' +
+                'translateY(-12px)';
+        });
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = '';
+        });
     });
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
-    });
-});
+}
 
 
 // ── Fahrtkosten ────────────────────────────────────────────
-document.getElementById("berechnen").addEventListener("click", berechnen);
-document.getElementById("adresse").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") berechnen();
+document.getElementById('berechnen').addEventListener('click', berechnen);
+document.getElementById('adresse').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') berechnen();
 });
 
-const START = { lat: 51.3659, lon: 10.7894 };
-const START_NAME = "Schernberg, 99706 Sondershausen";
+var START = { lat: 51.3659, lon: 10.7894 };
+var START_NAME = 'Schernberg, 99706 Sondershausen';
 
 async function berechnen() {
-
-    const adresse = document.getElementById("adresse").value.trim();
-    if (adresse === "") {
-        alert("Bitte einen Veranstaltungsort eingeben.");
+    var adresse = document.getElementById('adresse').value.trim();
+    if (!adresse) {
+        alert('Bitte einen Veranstaltungsort eingeben.');
         return;
     }
 
-    const btn = document.getElementById("berechnen");
-    btn.textContent = "⏳ Lädt...";
+    var btn = document.getElementById('berechnen');
+    btn.textContent = '⏳ Lädt...';
     btn.disabled = true;
 
     try {
-
-        // 1. Adresse geocodieren
-        const geo = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(adresse)}&limit=1`,
-            { headers: { "Accept-Language": "de" } }
+        // Geocoding
+        var geoRes = await fetch(
+            'https://nominatim.openstreetmap.org/search?format=json&q=' +
+            encodeURIComponent(adresse) + '&limit=1',
+            { headers: { 'Accept-Language': 'de' } }
         );
-        const geoData = await geo.json();
+        var geoData = await geoRes.json();
 
-        if (geoData.length === 0) {
-            alert("Ort nicht gefunden. Bitte genauer eingeben (z. B. \"Erfurt, Domplatz\").");
+        if (!geoData.length) {
+            alert('Ort nicht gefunden. Bitte genauer eingeben.');
             return;
         }
 
-        const zielLat  = geoData[0].lat;
-        const zielLon  = geoData[0].lon;
-        const zielName = geoData[0].display_name;
-        // Kurzname: nur bis zum zweiten Komma (z.B. "Erfurt, Thüringen" statt langer Adresse)
-        const zielKurz = zielName.split(',').slice(0, 2).join(',').trim();
+        var zielLat  = geoData[0].lat;
+        var zielLon  = geoData[0].lon;
+        var zielName = geoData[0].display_name;
+        var zielKurz = zielName.split(',').slice(0, 2).join(',').trim();
 
-        // 2. Route berechnen (OSRM)
-        const route = await fetch(
-            `https://router.project-osrm.org/route/v1/driving/${START.lon},${START.lat};${zielLon},${zielLat}?overview=false`
+        // Route
+        var routeRes = await fetch(
+            'https://router.project-osrm.org/route/v1/driving/' +
+            START.lon + ',' + START.lat + ';' + zielLon + ',' + zielLat +
+            '?overview=false'
         );
-        const routeData = await route.json();
+        var routeData = await routeRes.json();
 
-        if (!routeData.routes || routeData.routes.length === 0) {
-            alert("Route konnte nicht berechnet werden.");
+        if (!routeData.routes || !routeData.routes.length) {
+            alert('Route konnte nicht berechnet werden.');
             return;
         }
 
-        const km       = routeData.routes[0].distance / 1000; // einfache Strecke in km
-        const gesamt   = km * 2;                              // Hin + Zurück
-        const preis    = gesamt * 0.35;                       // 0,35 € pro km
+        var km     = routeData.routes[0].distance / 1000;
+        var gesamt = km * 2;
+        var preis  = gesamt * 0.35;
 
-        // 3. Anzeige aktualisieren
-        document.getElementById("ziel").textContent    = zielKurz;
-        document.getElementById("strecke").textContent = km.toFixed(1) + " km";
-        document.getElementById("gesamt").textContent  = gesamt.toFixed(1) + " km";
-        document.getElementById("preis").textContent   = preis.toFixed(2).replace(".", ",") + " €";
+        document.getElementById('ziel').textContent    = zielKurz;
+        document.getElementById('strecke').textContent = km.toFixed(1) + ' km';
+        document.getElementById('gesamt').textContent  = gesamt.toFixed(1) + ' km';
+        document.getElementById('preis').textContent   = preis.toFixed(2).replace('.', ',') + ' €';
 
-        // 4. Google Maps Link
-        const mapsRow  = document.getElementById("mapsRow");
-        const mapsLink = document.getElementById("mapsLink");
-        mapsLink.href  = `https://www.google.com/maps/dir/${encodeURIComponent(START_NAME)}/${encodeURIComponent(zielName)}`;
-        mapsRow.style.display = "flex";
+        var mapsRow  = document.getElementById('mapsRow');
+        var mapsLink = document.getElementById('mapsLink');
+        mapsLink.href = 'https://www.google.com/maps/dir/' +
+            encodeURIComponent(START_NAME) + '/' + encodeURIComponent(zielKurz);
+        mapsRow.style.display = 'flex';
 
     } catch (e) {
         console.error(e);
-        alert("Fehler beim Berechnen. Bitte Internetverbindung prüfen.");
+        alert('Fehler beim Berechnen. Bitte Internetverbindung prüfen.');
     } finally {
-        btn.textContent = "Berechnen";
+        btn.textContent = 'Berechnen';
         btn.disabled    = false;
     }
 }
-
-
-// ── Drucker-Medien Upload ──────────────────────────────────
-function handleMedia(input, stepId) {
-    const file = input.files[0];
-    if (!file) return;
-
-    const placeholder = document.getElementById('mediaPlaceholder' + stepId);
-    const preview     = document.getElementById('mediaPreview' + stepId);
-    const url         = URL.createObjectURL(file);
-
-    preview.innerHTML = '';
-
-    if (file.type.startsWith('video/')) {
-        const vid = document.createElement('video');
-        vid.src      = url;
-        vid.controls = true;
-        vid.style.cssText = 'width:100%;max-height:340px;border-radius:16px;object-fit:contain;';
-        preview.appendChild(vid);
-    } else {
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'Schritt ' + stepId;
-        img.style.cssText = 'width:100%;max-height:340px;border-radius:16px;object-fit:contain;';
-        preview.appendChild(img);
-    }
-
-    // Ändern-Button
-    const changeBtn       = document.createElement('button');
-    changeBtn.textContent = '🔄 Bild/Video ändern';
-    changeBtn.className   = 'mediaChangeBtn';
-    changeBtn.onclick     = () => input.click();
-    preview.appendChild(changeBtn);
-
-    placeholder.style.display = 'none';
-    preview.style.display     = 'block';
-}
-
-
-// ── Drucker-Anleitung (Stepper) ───────────────────────────
-(function () {
-    const steps     = document.querySelectorAll(".druckerStep");
-    const prevBtn   = document.getElementById("prevStep");
-    const nextBtn   = document.getElementById("nextStep");
-    const bar       = document.getElementById("progressBar");
-    const countEl   = document.getElementById("stepCount");
-    const dotsEl    = document.getElementById("druckerDots");
-    const total     = steps.length;
-    let current     = 0;
-
-    // Dots erstellen
-    steps.forEach((_, i) => {
-        const dot = document.createElement("span");
-        dot.className = "dot" + (i === 0 ? " active" : "");
-        dot.addEventListener("click", () => goTo(i));
-        dotsEl.appendChild(dot);
-    });
-
-    function goTo(index) {
-        steps[current].classList.remove("active");
-        dotsEl.children[current].classList.remove("active");
-        current = index;
-        steps[current].classList.add("active");
-        dotsEl.children[current].classList.add("active");
-
-        // Progress Bar
-        bar.style.width = ((current + 1) / total * 100) + "%";
-        countEl.textContent = `Schritt ${current + 1} von ${total}`;
-
-        // Buttons
-        prevBtn.disabled = current === 0;
-        nextBtn.textContent = current === total - 1 ? "✓ Fertig" : "Weiter →";
-        nextBtn.disabled = false;
-    }
-
-    prevBtn.addEventListener("click", () => { if (current > 0) goTo(current - 1); });
-    nextBtn.addEventListener("click", () => { if (current < total - 1) goTo(current + 1); });
-
-    // Initialisierung
-    goTo(0);
-})();
-
-
