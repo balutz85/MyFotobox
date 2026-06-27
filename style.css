@@ -549,7 +549,7 @@ section h2 {
 
 .contactBox h3 { font-size: clamp(22px, 6vw, 34px); margin-bottom: 22px; }
 .contactBox p  { margin: 10px 0; color: #d5dbe7; font-size: 16px; }
-.contactBox .primary { display: inline-block; margin-top: 26px; min-width: 200px; }
+.contactBox .primary { display: inline-block; margin-top: 13px; min-width: 200px; }
 
 @media (min-width: 900px) {
     .contactBox { padding: 50px 48px; }
